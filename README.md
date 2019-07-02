@@ -81,13 +81,15 @@ Write code that switches on a string, given the following conditions:
 
 var hello = "hello"
 
-if hello.count % 2 == 0 {
-print(hello)
-} else {
+switch hello.count % 2 {
+case 0 :
+for letter in hello {
+print(letter, terminator: "")
+}
+default :
 for (index,letter) in hello.enumerated() {
 if index % 2 != 0 {
 print(letter)
-}
 }
 ***
 ## Question 7
@@ -323,6 +325,12 @@ var problem = "split this string into words and print them on separate lines"
 
 // Your code
 ```
+var problem = "split this string into words and print them on separate lines"
+for words in problem.components(separatedBy: " ")  {
+
+print(words)
+}
+
 
 Example:
 Input:
@@ -353,11 +361,13 @@ var problem = "find the longest word in the problem description"
 
 // Your code here
 ```
-var problem = "split this string into words and print them on separate lines"
-for words in problem.components(separatedBy: " ")  {
-
-print(words)
+var problem = "find the longest word in the problem description"
+var split = problem.components(separatedBy: " ")
+var max = split.max(by: {$1.count > $0.count})
+if max != nil {
+print((max)!)
 }
+
 
 Example:
 Input:
@@ -390,5 +400,15 @@ Example:
 Input: `"How are you doing this Monday?"`
 
 Output: `7`
+
+
+let sentence = "How are you doing this Monday?"
+let wordCount = sentence.filter{ $0.isLetter || $0.isWhitespace }
+if let index = wordCount.lastIndex(of: " ") {
+let lastWord = wordCount[index...]
+print(lastWord.count)
+} else {
+print("No last word")
+}
 
 ***
